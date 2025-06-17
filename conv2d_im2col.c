@@ -116,3 +116,29 @@ void conv2d_im2col(
     free(kernel_flat);
     free(out_col);
 }
+/*
+每列 = [C0-k00, C0-k01, C0-k10, C0-k11,
+        C1-k00, C1-k01, C1-k10, C1-k11]
+*/
+
+/*
+import torch
+import torch.nn.functional as F
+
+x = torch.tensor([[[[ 1.,  2.,  3.,  4.],
+                    [ 5.,  6.,  7.,  8.],
+                    [ 9., 10., 11., 12.],
+                    [13., 14., 15., 16.]]]])
+
+# 卷积参数
+kH, kW = 2, 2
+stride = 1
+padding = 0
+
+# unfold = im2col
+out = F.unfold(x, kernel_size=(kH, kW), stride=stride, padding=padding)
+
+# 转置使其按列排列，便于与 C 实现对比
+print("im2col patches (each row is one patch):")
+print(out[0].T)
+*/
